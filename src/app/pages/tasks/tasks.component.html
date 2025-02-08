@@ -1,0 +1,26 @@
+<div class="tasks-container">
+  <header class="header">
+    <h2>Lista de Tareas</h2>
+    <!-- Botón de menú hamburguesa -->
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <!-- Menú desplegable -->
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon> Cerrar sesión
+      </button>
+    </mat-menu>
+  </header>
+  <ng-container *ngIf="tasks.length > 0; else noTasks">
+    <app-task-item *ngFor="let task of tasks" [task]="task" (taskEdited)="openTaskModal(task)"
+      (taskDeleted)="deleteTask(task.id)" (taskUpdated)="updateTaskStatus($event)"></app-task-item>
+  </ng-container>
+  <ng-template #noTasks>
+    <p>No hay tareas pendientes.</p>
+  </ng-template>
+  <button mat-fab class="add-task-btn" (click)="openTaskModal()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

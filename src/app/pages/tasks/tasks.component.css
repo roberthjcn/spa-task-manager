@@ -1,0 +1,36 @@
+.tasks-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+
+  h2 {
+    margin-bottom: 15px;
+  }
+
+  .add-task-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: #ff5733;
+  color: white;
+}
+
+mat-icon {
+  cursor: pointer;
+  color: white;
+}

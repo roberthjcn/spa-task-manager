@@ -1,0 +1,14 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <h2>Iniciar Sesión</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <mat-form-field appearance="outline">
+        <mat-label>Correo Electrónico</mat-label>
+        <input matInput formControlName="email" type="email" required />
+      </mat-form-field>
+      <button mat-button class="login-button" type="submit" [disabled]="loginForm.invalid">
+        Ingresar
+      </button>
+    </form>
+  </mat-card>
+</div>

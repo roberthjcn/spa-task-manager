@@ -1,0 +1,20 @@
+ <mat-card class="task-item">
+   <mat-card-content>
+     <div class="task-header">
+       <h3>{{ task.title }}</h3>
+       <button *ngIf="!task.status" mat-icon-button (click)="deleteTask()">
+         <mat-icon>delete</mat-icon>
+       </button>
+     </div>
+     <p>{{ task.description }}</p>
+     <small>Fecha de creación: {{  getCreationDate(task) | date:'short' }}</small>
+     <div class="task-footer">
+       <mat-checkbox [checked]="task.status" (change)="toggleTaskStatus($event)">
+         {{ task.status ? 'Completada' : 'Pendiente' }}
+       </mat-checkbox>
+       <button mat-icon-button *ngIf="!task.status" (click)="editTask()">
+         <mat-icon>edit</mat-icon>
+       </button>
+     </div>
+   </mat-card-content>
+ </mat-card>

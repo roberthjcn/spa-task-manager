@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  background-color: #ffffff;
+  margin: 0;
+  font-family: Roboto, Arial, sans-serif;
+}
+
+.mat-mdc-button {
+  background-color: #ff5733 !important;
+  color: white !important;
+}
+
