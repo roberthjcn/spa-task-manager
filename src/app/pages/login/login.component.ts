@@ -13,6 +13,8 @@ import { DialogCreateUserComponent } from '../../components/dialog-create-user/d
 import { SnackbarService } from '../../services/snackbar.service';
 import { firstValueFrom } from 'rxjs';
 import { AppConstants } from '../../shared/constants/constants';
+import { ICreateUserResponse } from '../../shared/interfaces/createUserResponse.interface';
+import { IUserResponse } from '../../shared/interfaces/userResponse.interface';
 
 @Component({
   selector: 'app-login',
@@ -50,7 +52,7 @@ export class LoginComponent {
     const { email } = this.loginForm.value;
 
     try {
-      const response = await this.attemptLogin(email);
+      const response: IUserResponse = await this.attemptLogin(email);
 
       if (!response) {
         this.showLoginError();
@@ -59,7 +61,7 @@ export class LoginComponent {
 
       this.handleLoginResponse(response, email);
     } catch (error) {
-      this.handleLoginError(error);
+      this.handleLoginError();
     }
   }
 
@@ -67,11 +69,11 @@ export class LoginComponent {
     return this.loginForm.valid;
   }
 
-  private async attemptLogin(email: string): Promise<any> {
+  private async attemptLogin(email: string): Promise<IUserResponse> {
     return await firstValueFrom(this.authService.login(email));
   }
 
-  private handleLoginResponse(response: any, email: string): void {
+  private handleLoginResponse(response: IUserResponse, email: string): void {
     switch (response.status) {
       case AppConstants.STATUS_CODES.SUCCESS:
         this.handleLoginSuccess(response.user?.email);
@@ -106,7 +108,7 @@ export class LoginComponent {
     this.snackbarService.showMessage(AppConstants.MESSAGES.UNKNOWN_ERROR);
   }
 
-  private handleLoginError(error: any): void {
+  private handleLoginError(): void {
     this.snackbarService.showMessage(AppConstants.MESSAGES.LOGIN_RETRY);
   }
 

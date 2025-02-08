@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
+import { ITaskResponse } from '../../shared/interfaces/taskResponse.interface';
 
 @Component({
   selector: 'app-task-form',
@@ -32,7 +33,7 @@ export class TaskFormComponent {
     status: [false]
   });
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: ITaskResponse | null) {
     if (data) {
       this.taskForm.patchValue(data);
     }

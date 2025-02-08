@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ITaskResponse } from '../../shared/interfaces/taskResponse.interface';
@@ -30,8 +30,13 @@ export class TaskItemComponent {
     this.taskDeleted.emit(this.task.id);
   }
 
-  toggleTaskStatus(event: any) {
-    this.taskUpdated.emit({ id: this.task.id, status: event.checked, description: event.description, title: event.title });
+  toggleTaskStatus(event: MatCheckboxChange) {
+    this.taskUpdated.emit({
+      id: this.task.id,
+      status: event.checked,
+      description: this.task.description,
+      title: this.task.title
+    });
   }
 
   editTask() {

@@ -6,6 +6,7 @@ import { SnackbarService } from '../../services/snackbar.service';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { AppConstants } from '../../shared/constants/constants';
+import { ICreateUserResponse } from '../../shared/interfaces/createUserResponse.interface';
 
 @Component({
   selector: 'app-dialog-create-user',
@@ -46,7 +47,7 @@ export class DialogCreateUserComponent {
     };
   }
 
-  private async registerUser(userData: IUserRequest): Promise<any> {
+  private async registerUser(userData: IUserRequest): Promise<ICreateUserResponse> {
     return await firstValueFrom(this.authService.registerUser(userData));
   }
 

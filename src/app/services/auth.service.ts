@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IUserResponse } from '../shared/interfaces/userResponse.interface';
 import { IUserRequest } from '../shared/interfaces/userRequest.interface';
+import { ICreateUserResponse } from '../shared/interfaces/createUserResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AuthService {
     return this.http.get<IUserResponse>(`${this.apiUrl}/${email}`);
   }
 
-  registerUser(data: IUserRequest): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/`, data);
+  registerUser(data: IUserRequest): Observable<ICreateUserResponse> {
+    return this.http.post<ICreateUserResponse>(`${this.apiUrl}/`, data);
   }
 }

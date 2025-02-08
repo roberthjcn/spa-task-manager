@@ -16,7 +16,7 @@ export class TaskService {
     return this.http.get<ITaskResponse[]>(`${this.apiUrl}?email=${emailUser}`);
   }
 
-  addTask(task: any): Observable<ITaskResponse> {
+  addTask(task: ITaskResponse): Observable<ITaskResponse> {
     return this.http.post<ITaskResponse>(`${this.apiUrl}/`, task);
   }
 
@@ -24,7 +24,7 @@ export class TaskService {
     return this.http.delete<string>(`${this.apiUrl}/${taskId}`);
   }
 
-  updateTask(taskId: string, updates: Partial<any>): Observable<string> {
+  updateTask(taskId: string, updates: Partial<ITaskResponse>): Observable<string> {
     return this.http.put<string>(`${this.apiUrl}/${taskId}`, updates);
   }
 }
