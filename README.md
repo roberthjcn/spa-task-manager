@@ -25,3 +25,12 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## Comments
+
+Para el front he decidido usar la version 17 de angular con la librería angular material para los estilos y diseños, los colores escogidos son en base al logo que predominaba en el
+reto técnico propuesto.
+
+Use varios componentes propios de angular material para el diseño del listado de tareas, así como también para el login y mensajes de alerta para cada acción realizada por el 
+usuario. Cabe recalcar que el proyecto de angular usa componentes standalone ya que estos nos permiten evitar crear un NgModule solo para declarar un componente, directiva o pipe.
