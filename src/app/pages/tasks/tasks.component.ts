@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatChip } from '@angular/material/chips';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TaskItemComponent } from '../../components/task-item/task-item.component';
 import { TaskFormComponent } from '../../components/task-form/task-form.component';
@@ -23,7 +24,8 @@ import { Timestamp } from '@angular/fire/firestore';
     MatIconModule,
     MatDialogModule,
     TaskItemComponent,
-    MatMenuModule
+    MatMenuModule,
+    MatChip
   ],
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss']
@@ -43,7 +45,6 @@ export class TasksComponent implements OnInit {
     this.initializeComponent();
   }
 
-
   private initializeComponent(): void {
     this.email = this.getUserEmail();
     this.loadTasks();
@@ -60,16 +61,15 @@ export class TasksComponent implements OnInit {
 
   private sortTasksByCreationDate(tasks: ITaskResponse[]): ITaskResponse[] {
     return tasks.sort((a, b) => {
-      const dateA = this.convertTimestampToDate(a.creationDate); // Convertir Timestamp a Date
-      const dateB = this.convertTimestampToDate(b.creationDate); // Convertir Timestamp a Date
-      return dateB.getTime() - dateA.getTime(); // Ordenar de más reciente a más antigua
+      const dateA = this.convertTimestampToDate(a.creationDate);
+      const dateB = this.convertTimestampToDate(b.creationDate);
+      return dateB.getTime() - dateA.getTime();
     });
   }
 
   private convertTimestampToDate(timestamp: { _seconds: number; _nanoseconds: number }): Date {
-    // Crear una instancia de Timestamp a partir del objeto plano
     const firebaseTimestamp = new Timestamp(timestamp._seconds, timestamp._nanoseconds);
-    return firebaseTimestamp.toDate(); // Convertir Timestamp a Date
+    return firebaseTimestamp.toDate();
   }
 
 
@@ -120,14 +120,17 @@ export class TasksComponent implements OnInit {
     this.loadTasks();
   }
 
-  async updateTaskStatus(update: { id: string; status: boolean }): Promise<void> {
-    await firstValueFrom(this.taskService.updateTask(update.id, update));
-    this.showMessage(
-      update.status
-        ? AppConstants.MESSAGES.TASK_COMPLETE
-        : AppConstants.MESSAGES.TASK_PENDING
-    );
-    this.loadTasks();
+  updateTaskStatus(update: { id: string; status: boolean }) {
+    this.taskService.updateTask(update.id, update).subscribe({
+      next: () => {
+        this.snackbarService.showMessage(update.status ? AppConstants.MESSAGES.TASK_COMPLETE : AppConstants.MESSAGES.TASK_PENDING);
+        this.loadTasks();
+      },
+      error: (err) => {
+        console.error('Error updating task status:', err);
+        this.snackbarService.showMessage('Error al actualizar la tarea');
+      },
+    });
   }
 
   logout(): void {

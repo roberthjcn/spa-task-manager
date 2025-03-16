@@ -48,7 +48,7 @@ export class DialogCreateUserComponent {
   }
 
   private async registerUser(userData: IUserRequest): Promise<ICreateUserResponse> {
-    return await firstValueFrom(this.authService.registerUser(userData));
+    return await firstValueFrom(this.authService.createUser(userData));
   }
 
   private handleSuccess(email: string): void {

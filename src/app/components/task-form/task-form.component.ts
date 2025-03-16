@@ -1,6 +1,6 @@
 import { Component, Inject, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
@@ -28,8 +28,8 @@ export class TaskFormComponent {
   private fb = inject(FormBuilder);
 
   taskForm: FormGroup = this.fb.group({
-    title: [''],
-    description: [''],
+    title: ['', [Validators.required, Validators.minLength(3)]],
+    description: ['', [Validators.required]],
     status: [false]
   });
 

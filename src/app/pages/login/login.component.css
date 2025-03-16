@@ -21,7 +21,6 @@ mat-form-field {
   width: 100%;
 }
 
-/* Botón */
 .login-button {
   width: 100%;
   margin-top: 1rem;
@@ -32,7 +31,6 @@ mat-form-field {
   border-radius: 8px;
 }
 
-/* Responsividad */
 @media (max-width: 600px) {
   .login-card {
     padding: 1.5rem;

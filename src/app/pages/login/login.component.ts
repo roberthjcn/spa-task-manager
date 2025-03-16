@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,7 +12,6 @@ import { DialogCreateUserComponent } from '../../components/dialog-create-user/d
 import { SnackbarService } from '../../services/snackbar.service';
 import { firstValueFrom } from 'rxjs';
 import { AppConstants } from '../../shared/constants/constants';
-import { ICreateUserResponse } from '../../shared/interfaces/createUserResponse.interface';
 import { IUserResponse } from '../../shared/interfaces/userResponse.interface';
 
 @Component({
@@ -70,7 +68,7 @@ export class LoginComponent {
   }
 
   private async attemptLogin(email: string): Promise<IUserResponse> {
-    return await firstValueFrom(this.authService.login(email));
+    return await firstValueFrom(this.authService.getUserByEmail(email));
   }
 
   private handleLoginResponse(response: IUserResponse, email: string): void {

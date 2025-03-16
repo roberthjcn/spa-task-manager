@@ -4,10 +4,16 @@
     <mat-form-field appearance="outline">
       <mat-label>Título</mat-label>
       <input matInput formControlName="title" />
+      <small *ngIf="taskForm.get('title')?.invalid && taskForm.get('title')?.touched">
+        El nombre es obligatorio (mínimo 3 caracteres).
+      </small>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Descripción</mat-label>
       <textarea matInput formControlName="description"></textarea>
+      <small *ngIf="taskForm.get('description')?.invalid && taskForm.get('description')?.touched">
+        La descripcion es obligatoria.
+      </small>
     </mat-form-field>
     <mat-slide-toggle formControlName="status">Completada</mat-slide-toggle>
   </form>
